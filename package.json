@@ -1,0 +1,23 @@
+{
+  "name": "basewebcomponent-redux",
+  "version": "0.0.2",
+  "browser": "dist/bundle.js",
+  "main": "index.js",
+  "unpkg": "dist/index.js",
+  "description": "Base Webcomponent Redux",
+  "scripts": {
+    "dist": "node 'build-dist.js' && rollup -c",
+    "watch": "rollup -c -w"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DominicVonk/BaseWebComponent-Redux/issues"
+  },
+  "homepage": "https://github.com/DominicVonk/BaseWebComponent-Redux#readme",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "rollup": "^2.13.1",
+    "rollup-plugin-terser": "^6.1.0",
+    "rollup-plugin-uglify": "^6.0.4"
+  }
+}
