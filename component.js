@@ -1,4 +1,4 @@
-import { connect } from "./index.js";
+import { connect } from "https://unpkg.com/base-webcomponent-redux";
 import BaseWebComponent, {
   BWC,
   html,

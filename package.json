@@ -1,6 +1,6 @@
 {
-  "name": "basewebcomponent-redux",
-  "version": "0.0.2",
+  "name": "base-webcomponent-redux",
+  "version": "0.0.3",
   "browser": "dist/bundle.js",
   "main": "index.js",
   "unpkg": "dist/index.js",
