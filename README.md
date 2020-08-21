@@ -1,25 +1,25 @@
-![Node.js Package](https://github.com/DominicVonk/BaseWebComponent-Redux/workflows/Node.js%20Package/badge.svg)
+![Node.js Package](https://github.com/modls/redux/workflows/Node.js%20Package/badge.svg)
 
-# Base WebComponent Redux
+# modls Redux
 
-## How To Use BaseWebComponent Redux
+## How To Use modls Redux
 
-Install the module via `npm i base-webcomponent-redux` and consume it as such:
+Install the module via `npm i @modls/redux` and consume it as such:
 
 ```js
-import { connect } from "base-webcomponent-redux";
+import { connect } from "@modls/redux";
 ```
 
 Alternatively you can use a CDN such as unpkg:
 
 ```js
-import { connect } from "https://unpkg.com/base-webcomponent-redux";
+import { connect } from "https://unpkg.com/@modls/redux";
 ```
 
 ## Example
 
 ```js
-export default BWC(
+export default registerComponent(
   connect(store)(mapStateToProps, mapDispatchToProps)(Component)
 );
 ```

@@ -1,3 +1,4 @@
+import { WrapComponent } from "@modls/core";
 const deepCopy = (inObject) => {
   let outObject, value, key;
   if (typeof inObject !== "object" || inObject === null) {
@@ -14,7 +15,6 @@ const deepCopy = (inObject) => {
 export const connect = (store) => (mapStateToProps, mapDispatchToProps) => (
   className
 ) => {
-  const instances = [];
   const _props = {};
   if (typeof mapDispatchToProps === "function") {
     let _mapProps = mapDispatchToProps(store.dispatch, store.getState);
@@ -27,22 +27,15 @@ export const connect = (store) => (mapStateToProps, mapDispatchToProps) => (
         mapDispatchToProps[func](...args)(store.dispatch, store.getState);
     });
   }
-  className.addHook((instance) => {
-    console.log(instance);
-    instance._setProps(_props);
-    if (typeof mapStateToProps === "function") {
-      const state = store.getState();
-      instance._setProps(deepCopy(mapStateToProps(state)));
-      instances.push(instance);
-    }
-  });
-  if (typeof mapStateToProps === "function") {
+  let hook = (component) => {
+    component._setProps(_props);
     store.subscribe(() => {
       const state = store.getState();
-      instances.forEach((instance) => {
-        instance._setProps(deepCopy(mapStateToProps(state)));
-      });
+      if (typeof mapStateToProps === "function") {
+        component._setProps(deepCopy(mapStateToProps(state)));
+      }
     });
   }
-  return className;
+  const state = store.getState();
+  return WrapComponent(className, deepCopy(mapStateToProps(state)), hook);
 };

@@ -1,10 +1,12 @@
-import { connect } from "https://unpkg.com/base-webcomponent-redux";
-import BaseWebComponent, {
-  BWC,
+import { connect } from "./dist/esm.js";
+import {
+  Component,
+  registerComponent,
   html,
-} from "https://pkgjs.space/base-webcomponent/latest";
+} from "./node_modules/@modls/core/dist/esm.js";
 var initialState = {
   todos: [],
+  todos2: [],
 };
 function todos(state = initialState, action) {
   switch (action.type) {
@@ -26,28 +28,32 @@ const addTodo = (text) => {
   };
 };
 
-class Test extends BaseWebComponent {
+class Test extends Component {
   static get props() {
     return {
-      addTodo: () => {},
+      addTodo: () => { },
       todos: [],
+      todos2: [],
+      watch: 'todos'
     };
   }
 
   click() {
+    console.log('hi');
     this.props.addTodo("test");
   }
   render() {
-    return html`<div onclick=${() => this.click()}>
-      Click ${this.props.todos.map((todo) => todo.text)}
-    </div>`;
+    return html`<div onclick=${()=> this.click()}>
+  Click ${this.props[this.props.watch].map((todo) => todo.text)}
+</div>`;
   }
 }
 
 const mapStateToProps = (state) => ({
   todos: state.todos,
+  todos2: state.todos2,
 });
 const mapDispatchToProps = (dispatch) => ({
   addTodo: (...args) => dispatch(addTodo(...args)),
 });
-export default BWC(connect(store)(mapStateToProps, mapDispatchToProps)(Test));
+export default registerComponent(connect(store)(mapStateToProps, mapDispatchToProps)(Test));
